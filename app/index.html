@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast Cover Studio — turn your photo into cover art</title>
+<meta name="description" content="An offline cover art maker: drop in your photos, pick a multi-panel layout, write a caption, grade it like a neon sunset, export a PNG to share.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<noscript>
+  <p style="padding: 16px 24px; background: #4d0f2e;">Neon Coast Cover Studio needs JavaScript: the cover is drawn on a canvas in your browser, so nothing works without it. Please enable JavaScript and reload.</p>
+</noscript>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">NC</span>
+    <div>
+      <h1>Neon Coast Cover Studio</h1>
+      <p>Your photo, poster style — made on your machine, nothing uploaded.</p>
+    </div>
+  </div>
+  <div class="steps">
+    <span><b>1</b> Add photos</span>
+    <span><b>2</b> Pick a layout</span>
+    <span><b>3</b> Write the caption</span>
+    <span><b>4</b> Export a PNG</span>
+  </div>
+</header>
+
+<main class="studio">
+  <section class="preview-col">
+    <div class="dropzone" id="dropzone">
+      <canvas id="stage" width="860" height="860" aria-label="Cover preview"></canvas>
+      <p class="drop-hint">Drop photos here, or use the upload button — drag a panel to move its photo, scroll to zoom.</p>
+    </div>
+    <div class="export-row">
+      <span class="export-label">Export PNG</span>
+      <button type="button" class="export-btn" data-size="square">1080 × 1080</button>
+      <button type="button" class="export-btn" data-size="portrait">1080 × 1350</button>
+      <button type="button" class="export-btn" data-size="wide">1920 × 1080</button>
+    </div>
+  </section>
+
+  <aside class="controls">
+    <section class="panel-block">
+      <h2>Photos</h2>
+      <div class="photo-actions">
+        <label class="upload-btn" for="upload">Upload photos</label>
+        <input type="file" id="upload" accept="image/*" multiple hidden>
+        <button type="button" id="sample-btn" class="ghost-btn">Try the samples</button>
+      </div>
+      <div class="photo-strip" id="photo-strip"></div>
+    </section>
+
+    <section class="panel-block">
+      <h2>Layout</h2>
+      <div class="layout-picker" id="layout-picker"></div>
+    </section>
+
+    <section class="panel-block">
+      <h2>Selected panel</h2>
+      <p class="panel-label" id="panel-label">Panel 1 of 3</p>
+      <label class="field">
+        <span>Photo in this panel</span>
+        <select id="panel-photo"></select>
+      </label>
+      <label class="field">
+        <span>Zoom <output id="zoom-val">100%</output></span>
+        <input type="range" id="zoom" min="0.5" max="4" step="0.05" value="1">
+      </label>
+      <label class="check">
+        <input type="checkbox" id="fit-toggle">
+        <span>Fit whole photo (no crop)</span>
+      </label>
+      <button type="button" id="reset-panel" class="ghost-btn">Reset this panel</button>
+    </section>
+
+    <section class="panel-block">
+      <h2>Caption</h2>
+      <label class="field">
+        <span>Title</span>
+        <input type="text" id="title" value="Neon Coast" maxlength="40">
+      </label>
+      <label class="field">
+        <span>Subtitle</span>
+        <input type="text" id="subtitle" value="where the sun never sets" maxlength="60">
+      </label>
+      <label class="field">
+        <span>Tagline</span>
+        <input type="text" id="tagline" value="A cover story" maxlength="40">
+      </label>
+    </section>
+
+    <section class="panel-block">
+      <h2>Colour grade</h2>
+      <div class="grade-picker" id="grade-picker"></div>
+      <label class="check">
+        <input type="checkbox" id="grain" checked>
+        <span>Film grain</span>
+      </label>
+      <label class="check">
+        <input type="checkbox" id="vignette" checked>
+        <span>Vignette</span>
+      </label>
+    </section>
+
+    <section class="panel-block">
+      <h2>Post size</h2>
+      <div class="size-picker" id="size-picker"></div>
+      <p class="hint">The preview follows the size you pick, so what you see is what the PNG will be.</p>
+    </section>
+  </aside>
+</main>
+
+<footer class="footnote">
+  <p>All artwork on this page is original and made for this studio. Photos never leave your computer.</p>
+</footer>
+
+<script type="module" src="src/studio.js"></script>
+</body>
+</html>

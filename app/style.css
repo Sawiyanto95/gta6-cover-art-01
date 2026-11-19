@@ -1,0 +1,346 @@
+/* Neon Coast Cover Studio — dark UI, neon accents, sunset warmth. */
+
+@font-face {
+  font-family: "Anton";
+  src: url("fonts/Anton-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url("fonts/Pacifico-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0d0510;
+  --panel: #1a0e20;
+  --panel-2: #241228;
+  --line: #3a1f45;
+  --text: #f6ecf2;
+  --muted: #c9a8c2;
+  --pink: #ff2e88;
+  --orange: #ff7a1a;
+  --gold: #ffd166;
+  --teal: #2ee6d6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* --- header ------------------------------------------------------------ */
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: linear-gradient(90deg, #2b0a33, #4d0f2e 55%, #7a2a12);
+  border-bottom: 2px solid var(--pink);
+}
+
+.brand { display: flex; gap: 14px; align-items: center; }
+
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  font-family: "Anton", sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(255, 46, 136, 0.55);
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.brand p { margin: 2px 0 0; color: #ffd9ec; font-size: 13px; }
+
+.steps { display: flex; gap: 18px; flex-wrap: wrap; color: #ffe9f4; font-size: 13px; }
+.steps b {
+  display: inline-grid;
+  place-items: center;
+  width: 22px; height: 22px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 12px;
+}
+
+/* --- layout ------------------------------------------------------------ */
+
+.studio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.preview-col { min-width: 0; }
+
+.dropzone {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.dropzone.over {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(255, 46, 136, 0.25);
+}
+
+#stage {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  /* Keep the whole cover on screen with the export buttons below it,
+     even for a tall portrait preview on a laptop. */
+  max-height: calc(100vh - 250px);
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  cursor: grab;
+  touch-action: none;
+}
+
+#stage:active { cursor: grabbing; }
+
+.drop-hint { margin: 10px 4px 0; color: var(--muted); font-size: 13px; }
+
+.export-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.export-label { font-weight: 700; letter-spacing: 0.4px; }
+
+.export-btn {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(255, 46, 136, 0.35);
+}
+
+.export-btn:hover { filter: brightness(1.12); }
+.export-btn:active { transform: translateY(1px); }
+
+/* --- controls ---------------------------------------------------------- */
+
+.controls { display: flex; flex-direction: column; gap: 14px; }
+
+.panel-block {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.panel-block h2 {
+  margin: 0 0 12px;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.photo-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.upload-btn, .ghost-btn {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--pink);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-btn { background: var(--pink); border-color: var(--pink); color: #fff; }
+.ghost-btn:hover { background: var(--panel-2); }
+
+.photo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.thumb {
+  width: 76px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+}
+
+.thumb:hover, .thumb:focus-visible { border-color: var(--teal); outline: none; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.hint { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+
+.layout-picker {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.layout-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.layout-btn.active { border-color: var(--pink); box-shadow: 0 0 0 2px rgba(255, 46, 136, 0.3); }
+
+.sketch {
+  width: 44px;
+  height: 34px;
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 4px;
+  background: #12060f;
+}
+
+.sketch i { background: linear-gradient(135deg, var(--orange), var(--pink)); border-radius: 1px; min-width: 0; min-height: 0; }
+.sketch-full { grid-template-columns: 1fr; }
+.sketch-duo { grid-template-columns: 1fr 1fr; }
+.sketch-trio { grid-template-columns: 1fr 1fr; grid-template-rows: 1.6fr 1fr; }
+.sketch-trio i:first-child { grid-column: 1 / 3; }
+.sketch-quad { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.sketch-hero3 { grid-template-columns: 1.6fr 1fr; grid-template-rows: 1fr 1fr 1fr; }
+.sketch-hero3 i:first-child { grid-row: 1 / 4; }
+
+.panel-label { margin: 0 0 10px; font-weight: 700; color: var(--teal); }
+
+.field { display: block; margin-bottom: 12px; }
+.field > span {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.field input[type="text"], .field select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #12060f;
+  color: var(--text);
+  font: inherit;
+}
+
+.field input[type="text"]:focus, .field select:focus {
+  border-color: var(--pink);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 46, 136, 0.25);
+}
+
+.field input[type="range"] { width: 100%; accent-color: var(--pink); }
+
+.check { display: flex; gap: 8px; align-items: center; margin: 8px 0; cursor: pointer; }
+.check input { accent-color: var(--pink); width: 16px; height: 16px; }
+
+.grade-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+
+.grade-btn {
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.grade-btn.active { border-color: #fff; }
+
+.size-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.size-btn {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.size-btn.active { border-color: var(--pink); color: #fff; background: rgba(255, 46, 136, 0.2); }
+
+.footnote {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 28px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* The export buttons get a little breathing room on narrow screens so
+   they never crowd the preview. */
+@media (max-width: 560px) {
+  .export-row { gap: 8px; }
+  .export-btn { flex: 1 1 40%; }
+}
+
+@media (max-width: 900px) {
+  .studio { grid-template-columns: 1fr; }
+  .brand h1 { font-size: 21px; }
+}
